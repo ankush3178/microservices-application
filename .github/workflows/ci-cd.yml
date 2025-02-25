@@ -123,7 +123,9 @@ jobs:
       #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY1 }}
 
       - name: Install GKE Auth Plugin
-        run: sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
 
       - name: Configure kubectl
         run: |
