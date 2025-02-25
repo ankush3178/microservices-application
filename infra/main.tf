@@ -5,6 +5,7 @@ resource "google_container_cluster" "gke_cluster" {
 
 resource "google_sql_database_instance" "sql_instance" {
   name             = "user-db-instance"
+  instance = google_sql_database_instance.sql_instance.name
   database_version = "MYSQL_8_0"
   region           = "us-central1"
   settings {
