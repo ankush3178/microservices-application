@@ -43,14 +43,6 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
         working-directory: infra
-        
-      - name: Check and Delete Terraform Lock (GCS)
-        run: gsutil rm -f gs://avi-hero-no-2/terraform/state/default.tflock || true
-        continue-on-error: true
-
-      - name: Force Unlock Terraform State
-        run: terraform force-unlock -force 1740490025990042 || true
-        working-directory: infra
   
       - name: Plan Terraform 
         run: terraform plan
