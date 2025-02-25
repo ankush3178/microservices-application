@@ -72,16 +72,28 @@ jobs:
       - name: List contents of target directory
         run: ls -la ./user-service/target
 
-      - name: Debug Environment
-        run: env
-
-
-
+      - name: Debug Docker Build
+        run: |
+          echo "Checking Docker version"
+          docker --version
+          echo "Checking Docker info"
+          docker info
+          
       - name: Build Docker Image
         run: |
-          docker build -t gcr.io/terraform-451704/user-service:latest ./user-service
+          echo "Building Docker image"
+          docker build -t gcr.io/your-gcp-project/user-service:latest ./user-service
+
+      - name: Authenticate to GCR
+        run: |
+          echo "Authenticating to GCR"
           echo ${{ secrets.GCP_SA_KEY }} | docker login -u _json_key --password-stdin gcr.io
-          docker push gcr.io/terraform-451704/user-service:latest
+
+      - name: Push Docker Image
+        run: |
+          echo "Pushing Docker image"
+          docker push gcr.io/your-gcp-project/user-service:latest
+
 
       - name: Verify gcloud authentication
         run: gcloud auth list
