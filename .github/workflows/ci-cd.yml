@@ -70,11 +70,10 @@ jobs:
         run: mvn clean package --file user-service/pom.xml
 
       - name: Build Docker Image
-        shell: bash
         run: |
-          docker build -t gcr.io/your-gcp-project/user-service:latest ./user-service
+          docker build -t gcr.io/terraform-451704/user-service:latest ./user-service
           echo ${{ secrets.GCP_SA_KEY }} | docker login -u _json_key --password-stdin gcr.io
-          docker push gcr.io/your-gcp-project/user-service:latest
+          docker push gcr.io/terraform-451704/user-service:latest
 
       - name: Authenticate to GKE (gcloud and kubectl setup)
         uses: google-github-actions/auth@v1
