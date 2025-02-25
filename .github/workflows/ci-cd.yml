@@ -60,6 +60,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
@@ -68,11 +73,6 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean package --file user-service/pom.xml
-
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Build Docker Image
         run: |
