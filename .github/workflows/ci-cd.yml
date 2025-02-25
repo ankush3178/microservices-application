@@ -113,6 +113,11 @@ jobs:
           credentials_json: ${{ secrets.GCP_SA_KEY1 }}
           project_id: terraform-451704  # Ensure correct project ID here
 
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gke-gcloud-auth-plugin
+
       - name: Set up GKE credentials
         run: |
           gcloud container clusters get-credentials my-cluster --region us-central1 --project terraform-451704
