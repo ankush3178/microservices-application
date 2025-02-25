@@ -101,7 +101,7 @@ jobs:
       - name: Push Docker Image
         run: |
           echo "Pushing Docker image"
-          docker push gcr.io/terraform-451704/user-service:latest ./user-service
+          docker push gcr.io/terraform-451704/user-service:latest
 
 
       - name: Verify gcloud authentication
