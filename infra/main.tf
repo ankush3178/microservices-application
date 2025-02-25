@@ -11,3 +11,9 @@ resource "google_sql_database_instance" "sql_instance" {
     tier = "db-f1-micro"
   }
 }
+
+resource "google_sql_database" "sql_database" {
+  name     = "user-db"  # Change to your database name
+  instance = google_sql_database_instance.sql_instance.name  # Link to the SQL instance
+}
+
