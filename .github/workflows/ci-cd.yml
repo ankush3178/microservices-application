@@ -43,7 +43,7 @@ jobs:
         run: terraform init
         working-directory: infra
 
-      - name: Plan Terraform
+      - name: Plan Terraform -lock=false
         run: terraform plan
         working-directory: infra
 
