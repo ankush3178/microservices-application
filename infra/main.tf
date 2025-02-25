@@ -1,6 +1,8 @@
 resource "google_container_cluster" "gke_cluster" {
   name     = "my-cluster"
   location = "us-central1"
+
+  initial_node_count = 1
 }
 
 resource "google_sql_database_instance" "sql_instance" {
