@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+  workflow_dispatch:
 
 jobs:
   terraform:
@@ -41,6 +42,11 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
+        working-directory: infra
+
+      - name: Force Unlock Terraform State (Manual Only)
+        if: github.event_name == 'workflow_dispatch'
+        run: terraform force-unlock -force <LOCK_ID>
         working-directory: infra
 
       - name: Plan Terraform -lock=false
