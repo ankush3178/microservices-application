@@ -72,8 +72,9 @@ jobs:
       - name: List contents of target directory
         run: ls -la ./user-service/target
 
-      - name: Show Generated Script
-        run: cat /home/runner/work/_temp/e45772c9-9ace-4b2b-8a64-2bcc626d0787.sh || echo "Script not found"
+      - name: Debug Environment
+        run: env
+
 
 
       - name: Build Docker Image
