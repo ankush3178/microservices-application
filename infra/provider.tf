@@ -6,6 +6,6 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project"
+  project = "terraform-451704"
   region  = "us-central1"
 }

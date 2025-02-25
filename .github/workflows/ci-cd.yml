@@ -18,6 +18,9 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+      
+      - name: Set GCP Credentials Environment Variable
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GCP_SA_KEY }}" >> $GITHUB_ENV
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
@@ -30,9 +33,9 @@ jobs:
 
       - name: Apply Terraform
         run: terraform apply -auto-approve
-        -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
-        -var="sql_password=${{ secrets.DB_PASSWORD }}" \
-        -var="terraform_bucket=${{ secrets.TF_BUCKET }}"
+         -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
+         -var="sql_password=${{ secrets.DB_PASSWORD }}" \
+         -var="terraform_bucket=${{ secrets.TF_BUCKET }}"
         working-directory: infra
 
   build-and-deploy:
