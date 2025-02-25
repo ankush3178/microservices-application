@@ -72,6 +72,10 @@ jobs:
       - name: List contents of target directory
         run: ls -la ./user-service/target
 
+      - name: Show Generated Script
+        run: cat /home/runner/work/_temp/e45772c9-9ace-4b2b-8a64-2bcc626d0787.sh || echo "Script not found"
+
+
       - name: Build Docker Image
         run: |
           docker build -t gcr.io/terraform-451704/user-service:latest ./user-service
