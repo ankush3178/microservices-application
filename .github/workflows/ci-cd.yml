@@ -26,6 +26,18 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.3.0
+      
+      - name: Setup Terraform Backend
+        id: backend
+        run: |
+          cat > infra/backend.tf << EOF
+          terraform {
+            backend "gcs" {
+              bucket = "avi-hero-no-2"
+              prefix = "terraform/state"
+             }
+            }
+          EOF
 
       - name: Initialize Terraform
         run: terraform init
