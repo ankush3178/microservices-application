@@ -109,28 +109,20 @@ jobs:
 
 
 
-      # - name: Authenticate to GKE (gcloud and kubectl setup)
-      #   uses: google-github-actions/auth@v1
-      #   with:
-      #     credentials_json: ${{ secrets.GCP_SA_KEY1 }}
-      #     project_id: terraform-451704  # Ensure correct project ID here
+      - name: Authenticate to GKE (gcloud and kubectl setup)
+        uses: google-github-actions/auth@v1
+        with:
+           credentials_json: ${{ secrets.GCP_SA_KEY1 }}
+           project_id: terraform-451704  # Ensure correct project ID here
 
 
-      # - name: Set up GKE credentials
-      #   run: |
-      #     gcloud container clusters get-credentials my-cluster --region us-central1 --project terraform-451704
-      #   env:
-      #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY1 }}
-
-      - name: Install GKE Auth Plugin
+      - name: Set up GKE credentials
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
+          gcloud container clusters get-credentials my-cluster --region us-central1 --project terraform-451704
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY1 }}
 
-      - name: Configure kubectl
-        run: |
-          export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-          gcloud container clusters get-credentials YOUR_CLUSTER_NAME --region YOUR_REGION --project YOUR_GCP_PROJECT
+      
 
       - name: Deploy to GKE
         run: |
