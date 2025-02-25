@@ -69,21 +69,27 @@ jobs:
       - name: Build with Maven
         run: mvn clean package --file user-service/pom.xml
 
+      - name: List contents of target directory
+        run: ls -la ./user-service/target
+
       - name: Build Docker Image
         run: |
           docker build -t gcr.io/terraform-451704/user-service:latest ./user-service
           echo ${{ secrets.GCP_SA_KEY }} | docker login -u _json_key --password-stdin gcr.io
           docker push gcr.io/terraform-451704/user-service:latest
 
+      - name: Verify gcloud authentication
+        run: gcloud auth list
+
       - name: Authenticate to GKE (gcloud and kubectl setup)
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-          project_id: terraform-451704  # Set your GCP project ID here
+          project_id: terraform-451704  # Ensure correct project ID here
 
       - name: Set up GKE credentials
         run: |
-          gcloud container clusters get-credentials my-cluster --region us-central1 --project your-gcp-project
+          gcloud container clusters get-credentials my-cluster --region us-central1 --project terraform-451704
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
 
