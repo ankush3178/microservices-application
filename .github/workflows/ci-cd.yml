@@ -41,7 +41,7 @@ jobs:
           EOF
 
       - name: Initialize Terraform
-        run: terraform init
+        run: terraform init -var="sql_password=${{ secrets.DB_PASSWORD }}"
         working-directory: infra
   
       - name: Plan Terraform 
@@ -49,8 +49,7 @@ jobs:
         working-directory: infra
 
       - name: Apply Terraform
-        run: | 
-          terraform apply -auto-approve
+        run: terraform apply -auto-approve
            -var="sql_password=${{ secrets.DB_PASSWORD }}"
         working-directory: infra
 
