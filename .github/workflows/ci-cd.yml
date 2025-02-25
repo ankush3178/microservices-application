@@ -107,16 +107,18 @@ jobs:
       - name: Verify gcloud authentication
         run: gcloud auth list
 
+      - name: Install Google Cloud SDK
+        run: |
+          echo "Installing Google Cloud SDK..."
+          curl https://sdk.cloud.google.com | bash
+          source $HOME/google-cloud-sdk/path.bash.inc
+
       - name: Authenticate to GKE (gcloud and kubectl setup)
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY1 }}
           project_id: terraform-451704  # Ensure correct project ID here
 
-      - name: Install gke-gcloud-auth-plugin
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gke-gcloud-auth-plugin
 
       - name: Set up GKE credentials
         run: |
