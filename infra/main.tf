@@ -3,6 +3,13 @@ resource "google_container_cluster" "gke_cluster" {
   location = "us-central1"
 
   initial_node_count = 1
+
+node_config {
+    machine_type = "e2-medium"
+    disk_size_gb = 50  # Reduce disk size to fit within quota
+    disk_type    = "pd-standard"  # Use standard persistent disk instead of SSD
+    preemptible  = false
+  }
 }
 
 resource "google_sql_database_instance" "sql_instance" {
