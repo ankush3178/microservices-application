@@ -48,15 +48,17 @@ jobs:
         run: terraform plan -var="sql_password=${{ secrets.DB_PASSWORD }}"
         working-directory: infra
 
+      
+  
+      - name: Apply Terraform
+        run: terraform apply -auto-approve
+           -var="sql_password=${{ secrets.DB_PASSWORD }}"
+        working-directory: infra
+
       - name: destroy Terraform
         run: terraform destroy -auto-approve
             -var="sql_password=${{ secrets.DB_PASSWORD }}"
         working-directory: infra
-  #
-   #   - name: Apply Terraform
-    #    run: terraform apply -auto-approve
-     #      -var="sql_password=${{ secrets.DB_PASSWORD }}"
-      #  working-directory: infra
 
   build-and-deploy:
     needs: terraform
