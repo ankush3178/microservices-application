@@ -42,11 +42,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-             <groupId>mysql</groupId>
-             <artifactId>mysql-connector-java</artifactId>
-             <version>8.0.33</version>  <!-- Add a valid version -->
-        </dependency>
     </dependencies>
 
     <build>
@@ -54,6 +49,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.example.userservice.UserServiceApplication</mainClass> <!-- Update with your main class -->
+                </configuration>
             </plugin>
         </plugins>
     </build>
