@@ -70,6 +70,7 @@ jobs:
         run: mvn clean package --file user-service/pom.xml
 
       - name: Build Docker Image
+        shell: bash
         run: |
           docker build -t gcr.io/your-gcp-project/user-service:latest ./user-service
           echo ${{ secrets.GCP_SA_KEY }} | docker login -u _json_key --password-stdin gcr.io
