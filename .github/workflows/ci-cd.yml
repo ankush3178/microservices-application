@@ -113,6 +113,11 @@ jobs:
           curl https://sdk.cloud.google.com | bash
           source $HOME/google-cloud-sdk/path.bash.inc
 
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          echo "Installing gke-gcloud-auth-plugin..."
+          gcloud components install gke-gcloud-auth-plugin
+
       - name: Authenticate to GKE (gcloud and kubectl setup)
         uses: google-github-actions/auth@v1
         with:
